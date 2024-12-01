@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
         if(isGround && Input.GetButtonDown("Jump"))
         {
-            var jumpForce = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+            var jumpForce = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y * rb.gravityScale);
             rb.velocity = new Vector2(rb.velocity.x * airControl, jumpForce);
         }
     }
@@ -43,10 +43,10 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        /*if(Legs !=  null)
+        if(Legs !=  null)
         {
             Gizmos.DrawWireSphere(Legs.position, radius);
-        }*/
+        }
             
     }
 }
