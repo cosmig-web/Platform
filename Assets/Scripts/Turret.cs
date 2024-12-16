@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    public float rapid = 1;
+    public float lifeTime = 1;
     public GameObject bulletPrefs;
     public Transform muzzle;
 
-    void Start()
+    private void Start()
     {
-        Invoke("Shoot", rapid);
+        InvokeRepeating("Shoot", 1, lifeTime);
     }
-
+    
     void Shoot()
     {
         var bullet = Instantiate(bulletPrefs, muzzle.position, Quaternion.identity).GetComponent<Bullet>();
         var direction = (muzzle.position - transform.position).normalized;
-        bullet.direction = -direction;
+        bullet.direction.x = -1;
+        print("Works");
+    }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
