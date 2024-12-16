@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour
+public class Heart : MonoBehaviour
 {
     public AudioClip damageSound;
 
@@ -27,10 +27,10 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        audioSource.PlayOneShot(damageSound);
+        //audioSource.PlayOneShot(damageSound);
         
         health -= damage;
-        onDamage.Invoke();
+        //onDamage.Invoke();
 
         if (health < 0)
         {

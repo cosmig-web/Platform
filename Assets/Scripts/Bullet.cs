@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     public Vector2 direction;
     public float speed = 20;
     public float lifeTime = 2;
-    public Vector2 damageRange = new Vector2(10, 20);
+    public Vector2 damageRange = new Vector2(1, 2);
     
     private Rigidbody2D rb;
 
@@ -30,12 +30,12 @@ public class Bullet : MonoBehaviour
         //if(other.gameObject.CompareTag("Player")) return;
         
         //TODO: get health component
-        var damage = Random.Range(damageRange.x, damageRange.y);
+        var damage = 1;
 
-        //DamageIndicator.instance.ShowDamage((int)damage, transform.position);
+         DamageIndicator.instance.ShowDamage((int)damage, transform.position);
 
         //print("Hit " + other.gameObject.name + " for " + damage + " damage");
-        var health = other.gameObject.GetComponent<Health>();
+        var health = other.gameObject.GetComponent<Heart>();
         if(health != null)
         {
             health.TakeDamage((int)damage);

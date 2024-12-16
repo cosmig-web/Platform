@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public Health health;
+    public Heart health;
 
     [Header("Movement")]
     public float speed = 10f;
@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        health = GetComponent<Heart>();
     }
 
     void Update()
