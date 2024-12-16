@@ -24,6 +24,7 @@ public class Shooter : MonoBehaviour
             var direction = (mousePos - transform.position).normalized;
 
             var bullet = Instantiate(bulletPrefs, muzzle.position, Quaternion.identity).GetComponent<Bullet>();
+            
             bullet.direction = direction;
         }
     }

@@ -4,28 +4,49 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [Header("Bullet Movement")]
+    public GameObject particles;
     public Vector2 direction;
     public float speed = 20;
+    public float lifeTime = 2;
     public Vector2 damageRange = new Vector2(10, 20);
-
+    
     private Rigidbody2D rb;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Invoke("SelfDestruct", lifeTime);
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         rb.velocity = direction * speed;
     }
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        //if (other.gameObject.CompareTag("Player")) return;
 
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        //if(other.gameObject.CompareTag("Player")) return;
+        
+        //TODO: get health component
         var damage = Random.Range(damageRange.x, damageRange.y);
 
-        DamageIndicator.instance.ShowDamage((int)damage, transform.position);
+        //DamageIndicator.instance.ShowDamage((int)damage, transform.position);
+
+        //print("Hit " + other.gameObject.name + " for " + damage + " damage");
+        var health = other.gameObject.GetComponent<Health>();
+        if(health != null)
+        {
+            health.TakeDamage((int)damage);
+        }
+        SelfDestruct();
+
+    }
+
+    void SelfDestruct()
+    {
+        Instantiate(particles, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

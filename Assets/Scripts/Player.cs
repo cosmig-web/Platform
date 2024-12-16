@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    public Health health;
+
     [Header("Movement")]
     public float speed = 10f;
     public float jumpHeight = 4;
@@ -111,19 +113,25 @@ public class Player : MonoBehaviour
         
     }
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         if(Legs !=  null)
         {
             Gizmos.DrawWireSphere(Legs.position, radius);
         }
             
-    }
+    }*/
     void OnCollisionEnter2D(Collision2D collision)
     {
+        //apply fall damage
         if(collision.relativeVelocity.y > 25)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            health.TakeDamage(1);
         }
+    }
+
+    public void Die()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

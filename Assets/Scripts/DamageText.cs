@@ -18,7 +18,7 @@ public class DamageText : MonoBehaviour
 
     void Update()
     {
-        transform.localPosition = Vector3.up * speed * Time.deltaTime;
+        transform.localPosition += Vector3.up * speed * Time.deltaTime;
     }
 
     public void SetText(int damage)

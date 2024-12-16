@@ -16,7 +16,7 @@ public class DamageIndicator : MonoBehaviour
         }
         else
         {
-            Destroy(instance);
+            Destroy(gameObject);
         }
     }
     public void ShowDamage(int damage, Vector3 position)
